@@ -1,0 +1,44 @@
+﻿@model IEnumerable<ModelEF.Model.Product>
+@{
+    ViewBag.Title = "Product";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section header{
+    <i class="fa fa-product-hunt"></i>&nbsp;Quản Lý Sản Phẩm}
+<div class="card">
+    @using (Html.BeginForm("Index", "Product", FormMethod.Post))
+    {
+    <div class="card-header">
+        <div class="card-header-left">
+            <div class="col-md-2">
+                @Html.ActionLink("Thêm", "Create", "Product", new { @class = "btn btn-danger" })
+            </div>
+        </div>       
+        </div>
+        }
+        <div class="card-block table-border-style">
+            <div class="table-responsive">
+                <table class="table">
+                    <tr class="alert-primary"  align="center">
+                        <th>ID</th>
+                        <th>Tên Sản phẩm</th>
+                        <th> Đơn giá</th>
+                        <th>Số lượng</th>
+                        <th>Loại Sản phẩm</th>
+                        <th>Thao tác</th>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr  align="center">
+                            <td>@Html.DisplayFor(modelItem => item.ID)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                            <td>@Html.DisplayFor(modelItem => item.UnitCost)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Category.Name)</td>
+                            <td>@Html.ActionLink("Xem chi tiết", "Detail", new { id = item.ID })</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
